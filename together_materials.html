@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOGETHER Materials - Cards, Forms & Training</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+        
+        .page {
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            page-break-after: always;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .page-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .page-subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        /* Conversation Starter Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .starter-card {
+            background: linear-gradient(135deg, #fff 0%, #f8f9ff 100%);
+            border: 2px solid #667eea;
+            border-radius: 15px;
+            padding: 25px;
+            min-height: 200px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .starter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.15);
+        }
+        
+        .card-category {
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .card-question {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .card-prompts {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .card-prompts ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .card-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        /* Anonymous Form */
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .form-title {
+            color: #667eea;
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .form-description {
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+        
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .checkbox-input {
+            margin-top: 3px;
+        }
+        
+        .checkbox-label {
+            color: #666;
+            line-height: 1.5;
+            font-size: 0.95em;
+        }
+        
+        .form-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 30px auto 0;
+            min-width: 200px;
+        }
+        
+        .form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        /* Training Materials */
+        .training-section {
+            margin-bottom: 40px;
+        }
+        
+        .training-module {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .module-title {
+            color: #333;
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .module-icon {
+            width: 35px;
+            height: 35px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .module-content {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .module-objectives {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .objectives-title {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .objectives-list {
+            color: #666;
+            padding-left: 20px;
+        }
+        
+        .scenario-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .scenario-title {
+            color: #856404;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .scenario-content {
+            color: #856404;
+            font-style: italic;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .form-container {
+                padding: 25px;
+                margin: 10px;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .page {
+                box-shadow: none;
+                border-radius: 0;
+                margin-bottom: 50px;
+            }
+            
+            .starter-card:hover, .form-submit:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Conversation Starter Cards Page -->
+    <div class="page">
+        <div class="page-header">
+            <h1 class="page-title">🤝 TOGETHER</h1>
+            <p class="page-subtitle">Conversation Starter Cards</p>
+        </div>
+        <div class="content">
+            <div class="cards-grid">
+                <div class="starter-card">
+                    <div class="card-icon">💭</div>
+                    <div class="card-category">Cultural Identity</div>
+                    <div class="card-question">What does "home" mean to you?</div>
+                    <div class="card-prompts">
+                        <strong>For TYA:</strong> Share about feeling connected to both your family's culture and American culture.
+                        <ul>
+                            <li>What traditions make you feel most connected to your heritage?</li>
+                            <li>How do you navigate being "different" at school vs. at home?</li>
+                        </ul>
+                        <strong>For Parents:</strong> Reflect on your journey and hopes for your children.
+                    </div>
+                </div>
+                
+                <div class="starter-card">
+                    <div class="card-icon">🎯</div>
+                    <div class="card-category">Dreams & Expectations</div>
+                    <div class="card-question">How do we balance family expectations with personal dreams?</div>
+                    <div class="card-prompts">
+                        <strong>Discussion points:</strong>
+                        <ul>
+                            <li>What sacrifices have shaped our family's opportunities?</li>
+                            <li>How can we honor our family while pursuing individual paths?</li>
+                            <li>What does success look like for each generation?</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="starter-card">
+                    <div class="card-icon">📱</div>
+                    <div class="card-category">Communication</div>
+                    <div class="card-question">How can we stay connected in a digital world?</div>
+                    <div class="card-prompts">
+                        <strong>Explore together:</strong>
+                        <ul>
+                            <li>What makes each of us feel heard and understood?</li>
+                            <li>How do different generations prefer to communicate?</li>
+                            <li>What are healthy boundaries with technology?</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="starter-card">
+                    <div class="card-icon">🌟</div>
+                    <div class="card-category">Mental Health</div>
+                    <div class="card-question">How do we talk about feelings and mental health?</div>
+                    <div class="card-prompts">
+                        <strong>Safe conversation starters:</strong>
+                        <ul>
+                            <li>"I've been feeling..." (share your emotional state)</li>
+                            <li>"When I'm stressed, I..." (share coping strategies)</li>
+                            <li>"I need support with..." (ask for specific help)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="starter-card">
+                    <div class="card-icon">🤲</div>
+                    <div class="card-category">Faith Journey</div>
+                    <div class="card-question">How does faith look different across generations?</div>
+                    <div class="card-prompts">
+                        <strong>Respectful exploration:</strong>
+                        <ul>
+                            <li>What role does faith play in your daily life?</li>
+                            <li>How do you see God working in our family?</li>
+                            <li>What questions about faith do you have?</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="starter-card">
+                    <div class="card-icon">🌍</div>
+                    <div class="card-category">Future Vision</div>
+                    <div class="card-question">What legacy do we want to build together?</div>
+                    <div class="card-prompts">
+                        <strong>Vision casting:</strong>
+                        <ul>
+                            <li>What values are most important to pass down?</li>
+                            <li>How can we make a positive impact in our community?</li>
+                            <li>What would make us proud of our family in 10 years?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: #f8f9ff; padding: 25px; border-radius: 15px; text-align: center;">
+                <h3 style="color: #667eea; margin-bottom: 15px;">How to Use These Cards</h3>
+                <p style="color: #666; line-height: 1.6;">
+                    Choose one card per family conversation. Take turns answering - no judgment, just listening. 
+                    Set a timer for 5 minutes per person to ensure everyone gets heard. End each conversation 
+                    by sharing one thing you learned about each other.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Anonymous Submission Form -->
+    <div class="page">
+        <div class="page-header">
+            <h1 class="page-title">🤝 TOGETHER</h1>
+            <p class="page-subtitle">Share Your Story Anonymously</p>
+        </div>
+        <div class="content">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2 class="form-title">Your Voice Matters</h2>
+                    <p class="form-description">
+                        Share your experiences, challenges, or breakthrough moments. Your story could help 
+                        another family on their journey. All submissions are completely anonymous and will 
+                        be reviewed before any potential sharing.
+                    </p>
+                </div>
+                
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">I am a...</label>
+                        <select class="form-select">
+                            <option value="">Select your role</option>
+                            <option value="teenager">Teenager (13-17)</option>
+                            <option value="young-adult">Young Adult (18-25)</option>
+                            <option value="parent">Parent</option>
+                            <option value="mentor">Mentor/Leader</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">What type of story would you like to share?</label>
+                        <select class="form-select">
+                            <option value="">Choose a category</option>
+                            <option value="breakthrough">Breakthrough Moment</option>
+                            <option value="challenge">Current Challenge</option>
+                            <option value="cultural-bridge">Cultural Bridge Experience</option>
+                            <option value="family-success">Family Success Story</option>
+                            <option value="question">Question/Need Advice</option>
+                            <option value="mental-health">Mental Health Journey</option>
+                            <option value="faith-related">Faith & Culture</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Tell us your story (Be as detailed as you'd like)</label>
+                        <textarea class="form-textarea" placeholder="Share your experience, challenge, success, or question. What happened? How did it make you feel? What did you learn? What advice would you give others?"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">What's one thing you wish others knew about your experience?</label>
+                        <textarea class="form-textarea" rows="4" placeholder="This could become a powerful message for other families..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">If we wanted to feature your story (still anonymously), what age range and cultural background should we mention?</label>
+                        <input type="text" class="form-input" placeholder="e.g., '19-year-old from a Nigerian family' or 'Parent who immigrated 15 years ago'">
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-checkbox">
+                            <input type="checkbox" class="checkbox-input" id="follow-up">
+                            <label for="follow-up" class="checkbox-label">
+                                I'm open to a TOGETHER team member reaching out for a brief, confidential follow-up conversation (optional - provide contact info below only if checked)
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Contact Info (only if you checked the box above)</label>
+                        <input type="text" class="form-input" placeholder="Email or phone number for follow-up">
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-checkbox">
+                            <input type="checkbox" class="checkbox-input" id="consent" required>
+                            <label for="consent" class="checkbox-label">
+                                I understand that my story may be shared anonymously to help other families, and that all personal identifying information will be removed. I consent to this potential use of my submission.
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="form-submit">Share My Story</button>
+                </form>
+                
+                <div style="background: #e8f5e8; padding: 20px; border-radius: 10px; margin-top: 30px; text-align: center;">
+                    <p style="color: #2d5a2d; font-weight: 600; margin-bottom: 10px;">Your Privacy Matters</p>
+                    <p style="color: #2d5a2d; font-size: 0.9em; line-height: 1.5;">
+                        This form doesn't collect any identifying information unless you specifically provide it 
+                        for follow-up. Your IP address and device information are not stored. 
+                        All submissions are reviewed by trained TOGETHER team members.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mentor Training Materials -->
+    <div class="page">
+        <div class="page-header">
+            <h1 class="page-title">🤝 TOGETHER</h1>
+            <p class="page-subtitle">Cultural Mentor Training Guide</p>
+        </div>
+        <div class="content">
+            <div class="training-section">
+                <div class="training-module">
+                    <h3 class="module-title">
+                        <div class="module-icon">1</div>
+                        Understanding Your Role as a Cultural Bridge
+                    </h3>
+                    <div class="module-content">
+                        <p>As a cultural mentor in the TOGETHER initiative, you serve as a living example of successful navigation between cultures. Your role is not to "fix" anyone, but to provide perspective, support, and practical guidance.</p>
+                        
+                        <div class="module-objectives">
+                            <div class="objectives-title">Key Responsibilities:</div>
+                            <ul class="objectives-list">
+                                <li>Listen without judgment to both cultural perspectives</li>
+                                <li>Share your own journey authentically, including struggles</li>
+                                <li>Help identify practical solutions to cultural conflicts</li>
+                                <li>Maintain confidentiality and appropriate boundaries</li>
+                                <li>Connect mentees with additional resources when needed</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="scenario-box">
+                            <div class="scenario-title">Scenario Practice:</div>
+                            <div class="scenario-content">
+                                "A 17-year-old tells you they feel guilty for wanting to pursue art instead of the pre-med track their parents expect. They say they love their parents but feel suffocated by expectations."
+                                <br><br>
+                                <strong>Mentor Response Framework:</strong> Validate feelings, share similar experience if applicable, explore options that honor both individual calling and family relationship, suggest conversation strategies with parents.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="training-module">
+                    <h3 class="module-title">
+                        <div class="module-icon">2</div>
+                        Active Listening & Cultural Humility
+                    </h3>
+                    <div class="module-content">
+                        <p>Effective mentoring begins with deep listening. Remember that each family's cultural journey is unique, even within the same ethnic background.</p>
+                        
+                        <div class="module-objectives">
+                            <div class="objectives-title">Active Listening Techniques:</div>
+                            <ul class="objectives-list">
+                                <li><strong>Reflect back:</strong> "What I hear you saying is..."</li>
+                                <li><strong>Ask clarifying questions:</strong> "Help me understand what that means to you..."</li>
+                                <li><strong>Validate emotions:</strong> "That sounds really difficult/exciting/confusing..."</li>
+                                <li><strong>Avoid assumptions:</strong> Don't assume your experience matches theirs exactly</li>
+                                <li><strong>Create space:</strong> Allow for silence and processing time</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: #fff; padding: 20px; border-radius: 10px; margin-top: 20px; border-left: 4px solid #667eea;">
+                            <strong style="color: #667eea;">Cultural Humility Reminder:</strong>
+                            <p style="margin-top: 10px; color: #666;">
+                                Even if you share similar cultural backgrounds, remember that factors like socioeconomic status, 
+                                region of origin, family dynamics, and personal temperament create unique experiences. 
+                                Stay curious rather than prescriptive.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="training-module">
+                    <h3 class="module-title">
+                        <div class="module-icon">3</div>
+                        Navigating Common Cultural Conflicts
+                    </h3>
+                    <div class="module-content">
+                        <p>Understanding typical areas of tension helps you provide more targeted support and practical solutions.</p>
+                        
+                        <div class="module-objectives">
+                            <div class="objectives-title">Common Conflict Areas & Responses:</div>
+                            <ul class="objectives-list">
+                                <li><strong>Career Expectations:</strong> Help explore ways to honor both passion and practical family concerns</li>
+                                <li><strong>Dating & Relationships:</strong> Facilitate conversations about values, timing, and cultural compatibility</li>
+                                <li><strong>Independence vs. Family Loyalty:</strong> Find balance between individual growth and family connection</li>
+                                <li><strong>Mental Health Stigma:</strong> Provide education and culturally sensitive approaches to emotional wellness</li>
+                                <li><strong>Religious Practice:</strong> Support authentic faith development while respecting family traditions</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="scenario-box">
+                            <div class="scenario-title">Complex Scenario Example:</div>
+                            <div class="scenario-content">
+                                A 20-year-old college student wants to live in dorms but parents insist they commute from home. Student feels controlled, parents feel their child is rejecting family values and wasting money.
+                                <br><br>
+                                <strong>Mentoring Approach:</strong> Help student understand parents' financial and cultural concerns. Suggest compromises (part-time on campus, gradual transition, shared financial responsibility). Role-play respectful conversation scripts. Help both sides see shared values of education and family connection.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="training-module">
+                    <h3 class="module-title">
+                        <div class="module-icon">4</div>
+                        Building Bridges: Practical Strategies
+                    </h3>
+                    <div class="module-content">
+                        <p>Your goal is to help both generations find common ground and develop better communication patterns.</p>
+                        
+                        <div class="module-objectives">
+                            <div class="objectives-title">Bridge-Building Tools:</div>
+                            <ul class="objectives-list">
+                                <li><strong>Translation:</strong> Help each side understand the other's perspective and motivations</li>
+                                <li><strong>Reframing:</strong> Present conflicts as shared challenges rather than opposing positions</li>
+                                <li><strong>Storytelling:</strong> Share your own journey to normalize the struggle and show possible outcomes</li>
+                                <li><strong>Practical Solutions:</strong> Suggest concrete steps and compromises both sides can try</li>
+                                <li><strong>Celebration:</strong> Acknowledge progress and small victories in understanding</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: #e8f5e8; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                            <strong style="color: #2d5a2d;">Success Indicators to Watch For:</strong>
+                            <ul style="margin-top: 10px; color: #2d5a2d; padding-left: 20px;">
+                                <li>Both parties using "we" language instead of "you vs. me"</li>
+                                <li>Increased curiosity about each other's perspectives</li>
+                                <li>Voluntary sharing of feelings and concerns</li>
+                                <li>Willingness to try new approaches to communication</li>
+                                <li>Recognition of shared values beneath surface disagreements</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="training-module">
+                    <h3 class="module-title">
+                        <div class="module-icon">5</div>
+                        Boundaries & When to Refer
+                    </h3>
+                    <div class="module-content">
+                        <p>Knowing your limits protects both you and those you mentor. Some situations require professional intervention.</p>
+                        
+                        <div class="module-objectives">
+                            <div class="objectives-title">Always Refer When You Encounter:</div>
+                            <ul class="objectives-list">
+                                <li>Mentions of self-harm, suicide, or serious depression</li>
+                                <li>Evidence of abuse (physical, emotional, or sexual)</li>
+                                <li>Substance abuse concerns</li>
+                                <li>Eating disorders or severe body image issues</li>
+                                <li>Situations beyond your experience or comfort level</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: #fff3cd; padding: 20px; border-radius: 10px; margin-top: 20px; border: 1px solid #ffeaa7;">
+                            <strong style="color: #856404;">Emergency Contacts:</strong>
+                            <div style="margin-top: 10px; color: #856404;">
+                                <p><strong>Crisis Text Line:</strong> Text HOME to 741741</p>
+                                <p><strong>National Suicide Prevention Lifeline:</strong> 988</p>
+                                <p><strong>Church Leadership:</strong> [Insert church emergency contact]</p>
+                                <p><strong>TOGETHER Program Director:</strong> [Insert contact info]</p>
+                            </div>
+                        </div>
+                        
+                        <div class="module-objectives" style="margin-top: 20px;">
+                            <div class="objectives-title">Healthy Boundaries Include:</div>
+                            <ul class="objectives-list">
+                                <li>Meeting in public or church spaces, not private homes</li>
+                                <li>Maintaining regular check-ins with program leadership</li>
+                                <li>Not providing financial assistance or becoming overly involved in family decisions</li>
+                                <li>Keeping relationships focused on mentoring rather than friendship</li>
+                                <li>Taking breaks when you feel emotionally overwhelmed</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
